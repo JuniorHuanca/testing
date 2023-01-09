@@ -32,18 +32,18 @@ export default async function loginHandler(req, res) {
         });
 
         res.setHeader("Set-Cookie", serialized);
-        if(myTokenName){return res.status(200).json({
+        if(myTokenName){return res.status(200).send({
             message: "Usuario logeado",
         });}
         if (rol) {
-            return res.status(200).json({
+            return res.status(200).send({
                 message: "Successful login: admin",
             });
         }
-        return res.status(200).json({
+        return res.status(200).send({
             message: "Successful login: user",
         });
     }
 
-    return res.status(401).json({ error: "Invalid credentials" });
+    return res.status(401).send({ error: "Invalid credentials" });
 }
