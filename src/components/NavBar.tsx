@@ -62,7 +62,7 @@ const NavBar = () => {
           <Logo className="w-20 h-20"></Logo>
         </span>
         {!user && (
-          <Link href='${process.env.AUTH0_LOGIN_URL}/api/auth/login' className="block">
+          <Link href='/api/auth/login' className="block">
             Login
           </Link>
         )}
