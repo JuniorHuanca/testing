@@ -83,7 +83,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const response = await axios.get(`${process.env.RESTURL_PRODUCTS}/products/` + params.id)
-  const wine = response.data
+  const wine = await response.data
   return {
     props: {
       wine,
