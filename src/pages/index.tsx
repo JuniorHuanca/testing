@@ -3,8 +3,7 @@ import Home from '../components/Home'
 import { useUser } from '@auth0/nextjs-auth0/client';
 import axios from 'axios';
 import { useRouter } from "next/router";
-import dotenv from "dotenv";
-dotenv.config();
+
 function isUser(obj: any): obj is { '/roles': string[] } {
   return '/roles' in obj;
 }
