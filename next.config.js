@@ -26,6 +26,7 @@ module.exports = (phase) => {
       if (isDev) return 'http://localhost:3001'
       if (isProd) return 'https://ladionisiaback-production.up.railway.app/products'
     })(),
+    AUTH0_LOGIN_URL: process.env.AUTH0_LOGIN_URL,
   }
 
   // next.config.js object
