@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import axios from 'axios';
 
-export default async function loginHandler(req: { body: { sub: string; email: string; nickname: string; }; cookies: { myTokenName: string; }; }, res: { setHeader: (arg0: string, arg1: string) => void; status: (arg0: number) => { (): string; new(): string; send: { (arg0: { message?: string; error?: string; }): string; new(): string; }; }; }) {
+export default async function loginHandler(req: { body: { sub: any; email: any; nickname: any; }; cookies: { myTokenName: any; }; }, res: { setHeader: (arg0: string, arg1: any) => void; status: (arg0: number) => { (): any; new(): any; json: { (arg0: { message?: string; error?: string; }): any; new(): any; }; }; }) {
     const { sub, email, nickname } = req.body;
     const response = await axios.get(`${process.env.RESTURL_PRODUCTS}/auth0/user/roles/${sub}`);
     const rol = response.data.find((element: { name: string; }) => element.name === 'administrador');
@@ -32,18 +32,18 @@ export default async function loginHandler(req: { body: { sub: string; email: st
         });
 
         res.setHeader("Set-Cookie", serialized);
-        if(myTokenName){return res.status(200).send({
+        if(myTokenName){return res.status(200).json({
             message: "Usuario logeado",
         });}
         if (rol) {
-            return res.status(200).send({
+            return res.status(200).json({
                 message: "Successful login: admin",
             });
         }
-        return res.status(200).send({
+        return res.status(200).json({
             message: "Successful login: user",
         });
     }
 
-    return res.status(401).send({ error: "Invalid credentials" });
+    return res.status(401).json({ error: "Invalid credentials" });
 }
