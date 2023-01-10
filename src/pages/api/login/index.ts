@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import axios from 'axios';
 
-export default async function loginHandler(req, res) {
+export default async function loginHandler(req: { body: { sub: string; email: string; nickname: string; }; cookies: { myTokenName: string; }; }, res: { setHeader: (arg0: string, arg1: string) => void; status: (arg0: number) => { (): string; new(): string; send: { (arg0: { message?: string; error?: string; }): string; new(): string; }; }; }) {
     const { sub, email, nickname } = req.body;
     const response = await axios.get(`${process.env.RESTURL_PRODUCTS}/auth0/user/roles/${sub}`);
     const rol = response.data.find((element: { name: string; }) => element.name === 'administrador');
